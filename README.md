@@ -23,10 +23,10 @@ To run the Playbook, you will need:
 
 In an Ansible machine, make a copy of the repository and join it with the configuration files (described below), make sure the credentials work. The file's tree should look like:
 ```
-/webserver.yml
-/static_site.cfg
-/colourAnsible.pem
-/credentials
+/foo/webserver.yml
+/foo/static_site.cfg
+/foo/colourAnsible.pem
+/foo/credentials
 /etc/ansible/hosts 
 ```
 
