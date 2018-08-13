@@ -32,16 +32,16 @@ In an Ansible machine, make a copy of the repository and join it with the config
 
 The files required to set up are the followings:
 
-#An ansible definition for "webservers" hosts
+*An ansible definition for "webservers" hosts
 /etc/ansible/hosts
 ```
 [webservers]
 nginx1 ansible_ssh_host=examplename
 ```
-#An RSA private key to connect by ssh with the machine
+*An RSA private key to connect by ssh with the machine
 /foo/colourAnsible.pem
 
-#AMI credentials to connect an S3 bucket
+*AMI credentials to connect an S3 bucket
 /foo/credentials 
 ```
 [default]
