@@ -1,0 +1,47 @@
+- name: Provision nginx webservers for Simple Web App
+  hosts: webservers
+  tasks:
+    - name: php and aws packages
+      apt: name={{item}} state=latest
+      with_items:
+           - php-common
+           - php-cli
+           - php-fpm
+           - awscli
+      become: yes
+    - name: ensure nginx is at the latest version
+      apt: name=nginx state=latest
+      become: yes
+    - name: getting repo from github
+      git:
+        repo: https://github.com/ColourboxDevelopment/simple-web-app.git
+        dest: /sites/simplewebapp
+      become: yes
+    - name: check directory for bucket credentials
+      file: path=.aws state=directory
+    - name: copy bucket credentials
+      copy:
+        src: credentials
+        dest: .aws/credentials
+      become: yes
+    - name: sync static content images to store in S3
+      shell: AWS_CONFIG_FILE=.aws/credentials aws s3 sync /sites/simplewebapp/public/images/ s3://dev.talaman.info/colourbox/images
+    - name: sync static content images to store in S3
+      shell: AWS_CONFIG_FILE=.aws/credentials aws s3 sync /sites/simplewebapp/public/css/ s3://dev.talaman.info/colourbox/css
+      become: yes
+    - name: copy the nginx config file
+      copy:
+        src: static_site.cfg
+        dest: /etc/nginx/sites-available/static_site.cfg
+      become: yes
+    - name: create symlink
+      file:
+        src: /etc/nginx/sites-available/static_site.cfg
+        dest: /etc/nginx/sites-enabled/default
+        state: link
+      become: yes
+    - name: restart nginx
+      service:
+        name: nginx
+        state: restarted
+      become: yes
