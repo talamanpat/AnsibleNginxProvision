@@ -14,9 +14,13 @@ The rockstar Playbook script can be found in:
 ### Prerequisites
 
 To run the Playbook, you will need:
+
 -an Ansible machine.
+
 -an Ubuntu instance with Python and SSH installed.
+
 -a "pem" Key Pair to connect the machines by SSH.
+
 -an AWS AMI credential to connect S3
 
 ### Installing
