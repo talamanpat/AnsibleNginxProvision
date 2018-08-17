@@ -1,4 +1,4 @@
-# Simple Web App for Colourbox
+# Simple Ansible Nginx provision and configuration
 
 An Ansible Playbook to provision Nginx web-servers, getting the code from a Git repository and sending static files to S3. 
 
